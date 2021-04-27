@@ -10,10 +10,10 @@ export default forwardRef(function MinDurationHandler(
       ? () => {
           setSuspend(true);
         }
-      : undefined
+      : undefined,
   }));
   if (suspend) {
-    throw new Promise(resolve =>
+    throw new Promise((resolve) =>
       setTimeout(() => {
         setSuspend(false);
         resolve();

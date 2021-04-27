@@ -11,11 +11,11 @@ export default function useStateIfMounted(...args) {
   });
   return [
     value,
-    useCallback(value => {
+    useCallback((value) => {
       if (isMountedRef.current) {
         setValue(value);
       }
       return isMountedRef.current;
-    }, [])
+    }, []),
   ];
 }
