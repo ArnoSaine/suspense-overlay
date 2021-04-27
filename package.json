@@ -1,0 +1,77 @@
+{
+  "name": "suspense-overlay",
+  "version": "0.1.0",
+  "description": "Version of Suspense, which shows the fallback on top of previous content.",
+  "keywords": [
+    "react",
+    "suspense"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ArnoSaine/suspense-overlay.git"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Arno Saine",
+    "email": "arno@mowhi.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./lib/main.js"
+  },
+  "main": "./lib/main.cjs",
+  "module": "./lib/main.js",
+  "files": [
+    "lib",
+    "demo.gif"
+  ],
+  "scripts": {
+    "build": "npm-run-all build:*",
+    "build:app": "react-scripts build",
+    "build:lib": "library-scripts build",
+    "prepare": "npm run build:lib",
+    "start": "concurrently \"npm run watch\" \"react-scripts start\"",
+    "startOnly": "react-scripts start",
+    "test": "concurrently \"npm run watch\" \"react-scripts test\"",
+    "testOnly": "react-scripts test",
+    "watch": "library-scripts watch"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "suspense-overlay": "<rootDir>"
+    }
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.12.5"
+  },
+  "devDependencies": {
+    "@arnosaine/react-scripts": "^4.0.0-3",
+    "@postinumero/library-scripts": "^0.1.0",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.1",
+    "@testing-library/user-event": "^13.1.5",
+    "concurrently": "^6.0.2",
+    "cross-env": "^7.0.2",
+    "npm-run-all": "^4.1.5",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
