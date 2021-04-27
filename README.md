@@ -9,7 +9,6 @@ Same as [React.Suspense](https://reactjs.org/docs/react-api.html#reactsuspense),
 ## Example
 
 ```js
-import React, { useState } from 'react';
 import Suspense from 'suspense-overlay';
 
 export default function App() {
