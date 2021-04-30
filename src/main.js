@@ -3,11 +3,11 @@ import Fallback from './Fallback';
 import MinDurationHandler from './MinDurationHandler';
 
 export default function SuspenseOverlay({
-  wrapper: WrapperComponent = 'div',
   children,
-  container: ContainerComponent = 'div',
+  containerComponent: ContainerComponent = 'div',
   containerStyle = { position: 'relative' },
   minDuration = 500,
+  wrapperComponent: WrapperComponent = 'div',
   ...otherProps
 }) {
   const contentRef = useRef();
@@ -16,10 +16,10 @@ export default function SuspenseOverlay({
     <Suspense
       fallback={
         <Fallback
+          {...otherProps}
           startMinDuration={minDurationHandler.current?.startMinDuration}
           contentRef={contentRef}
           WrapperComponent={WrapperComponent}
-          {...otherProps}
         />
       }
     >

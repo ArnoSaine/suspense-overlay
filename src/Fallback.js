@@ -4,8 +4,13 @@ import replaceFirstChild from './replaceFirstChild';
 import useStateIfMounted from './useStateIfMounted';
 
 export default function Fallback({
-  contentRef,
-  fallback,
+  contained = true,
+  delay = 100,
+  filter = 'blur(4px)',
+  root = '#root',
+  fallbackWrapperComponent: FallbackWrapperComponent = 'div',
+  overlayComponent: OverlayComponent = 'div',
+  WrapperComponent,
   overlayDelayBaseStyle = {
     top: 0,
     left: 0,
@@ -13,26 +18,20 @@ export default function Fallback({
     bottom: 0,
     zIndex: 1000,
   },
-  backgroundColor = 'rgba(255, 255, 255, 0.5)',
-  overlayBaseStyle = {
-    backgroundColor,
-    boxShadow: `0px 0px 4px ${backgroundColor}`,
-  },
   overlayDelayStyle = {
     ...overlayDelayBaseStyle,
     position: 'fixed',
   },
-  overlayStyle = {
-    ...overlayDelayStyle,
-    ...overlayBaseStyle,
-  },
-  containedOverlayDelayStyle = {
+  overlayDelayContainedStyle = {
     ...overlayDelayBaseStyle,
     position: 'absolute',
   },
-  containedOverlayStyle = {
-    ...containedOverlayDelayStyle,
-    ...overlayBaseStyle,
+  overlayStyle = {
+    ...overlayDelayStyle,
+    backdropFilter: filter,
+  },
+  overlayContainedStyle = {
+    ...overlayDelayContainedStyle,
   },
   fallbackStyle = {
     position: 'absolute',
@@ -41,16 +40,13 @@ export default function Fallback({
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
-  wrapperStyleOnOverlay = {
-    filter: 'blur(4px)',
+  wrapperOnOverlayStyle,
+  wrapperOnOverlayContainedStyle = {
+    filter,
   },
-  root = '#root',
-  WrapperComponent,
-  OverlayComponent = 'div',
-  FallbackWrapperComponent = 'div',
-  delay = 100,
+  contentRef,
+  fallback,
   startMinDuration,
-  contained = true,
 }) {
   const [delayed, setDelayed] = useStateIfMounted(Boolean(delay));
   useEffect(() => {
@@ -68,12 +64,12 @@ export default function Fallback({
   const overlay = (
     <OverlayComponent
       style={
-        contained
-          ? delayed
-            ? containedOverlayDelayStyle
-            : containedOverlayStyle
-          : delayed
-          ? overlayDelayStyle
+        delayed
+          ? contained
+            ? overlayDelayContainedStyle
+            : overlayDelayStyle
+          : contained
+          ? overlayContainedStyle
           : overlayStyle
       }
     >
@@ -87,7 +83,13 @@ export default function Fallback({
   return (
     <>
       <WrapperComponent
-        style={delayed ? undefined : wrapperStyleOnOverlay}
+        style={
+          delayed
+            ? undefined
+            : contained
+            ? wrapperOnOverlayContainedStyle
+            : wrapperOnOverlayStyle
+        }
         ref={
           contentRef.current &&
           ((elem) => {

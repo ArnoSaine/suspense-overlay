@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Suspense from 'suspense-overlay';
 
 export default function App() {
