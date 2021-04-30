@@ -1,6 +1,6 @@
 {
   "name": "suspense-overlay",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Suspense, which shows the fallback on top of previous content.",
   "keywords": [
     "react",
@@ -22,8 +22,7 @@
   "main": "./lib/main.cjs",
   "module": "./lib/main.js",
   "files": [
-    "lib",
-    "demo.gif"
+    "lib"
   ],
   "scripts": {
     "build": "npm-run-all build:*",
