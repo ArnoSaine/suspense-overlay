@@ -82,6 +82,6 @@ see [Fallback.tsx](src/Fallback.tsx) for more overrides and details.
 
 | Name       | Type                 | Default value | Description                                                                                                                    |
 | ---------- | -------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `children` | `React.ReactElement` | styled `div`  | As in `React.Suspense`. Must also be a valid argument for `React.cloneElement` and forward `ref` to the outermost DOM element. |
-| `fallback` | `React.ReactElement` | styled `div`  | As in `React.Suspense`. Must also be a valid argument for `React.cloneElement`.                                                |
-| `inProp?`  | `string`             | `"open"`      | A prop name of a `boolean` that the `fallback` uses to be visible or hidden                                                    |
+| `children` | `React.ReactElement` | -             | As in `React.Suspense`. Must also be a valid argument for `React.cloneElement` and forward `ref` to the outermost DOM element. |
+| `fallback` | `React.ReactElement` | -             | As in `React.Suspense`. Must also be a valid argument for `React.cloneElement`.                                                |
+| `inProp?`  | `string`             | `"open"`      | A prop name of a `boolean` that the `fallback` should use to be visible or hidden                                              |

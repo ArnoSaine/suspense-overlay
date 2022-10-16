@@ -1,6 +1,6 @@
 {
   "name": "suspense-overlay",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Suspense, which shows the fallback on top of previous content.",
   "keywords": [
     "react",
