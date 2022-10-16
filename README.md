@@ -1,14 +1,46 @@
 Suspense, which shows the fallback on top of previous content.
 
-![demo](demo.gif 'Demo')
+![demo](demo.gif "Demo")
 
 ## Example
 
 ```js
-import Suspense from 'suspense-overlay';
+import Suspense from "suspense-overlay";
 
 export default function App() {
   return <Suspense fallback="loading...">...</Suspense>;
+}
+```
+
+## With MUI Backdrop
+
+![mui-backdrop](mui-backdrop.gif "MUI Backdrop")
+
+```js
+import { Backdrop, Box, CircularProgress } from "@mui/material";
+import { SuspenseOverlayCore } from "suspense-overlay";
+
+export default function MuiBackdropSuspense({ children }) {
+  return (
+    <Box sx={{ position: "relative", display: "grid" }}>
+      <SuspenseOverlayCore
+        fallback={
+          <Backdrop
+            sx={{
+              position: "relative",
+              gridArea: "1 / 1",
+              backgroundColor: (theme) =>
+                alpha(theme.palette.background.paper, 0.5),
+            }}
+          >
+            <CircularProgress />
+          </Backdrop>
+        }
+      >
+        <Box sx={{ gridArea: "1 / 1" }}>{children}</Box>
+      </SuspenseOverlayCore>
+    </Box>
+  );
 }
 ```
 
@@ -16,25 +48,40 @@ export default function App() {
 
 ### Props
 
-| Name       | Description          |
-| ---------- | -------------------- |
-| `children` | As in React.Suspense |
-| `fallback` | As in React.Suspense |
+| Name       | Description            |
+| ---------- | ---------------------- |
+| `children` | As in `React.Suspense` |
+| `fallback` | As in `React.Suspense` |
 
 #### Optional
 
-| Name                       | Default value              | Description                                                       |
-| -------------------------- | -------------------------- | ----------------------------------------------------------------- |
-| `contained`                | `true`                     | Set `false` to show fullscreen overlay                            |
-| `containerComponent`       | `div`                      | Component that wraps everything                                   |
-| `containerStyle`           | `{ position: 'relative' }` | Styles for `containerComponent`                                   |
-| `filter`                   | `blur(4px)`                | Style applied to the overlay                                      |
-| `delay`                    | `100`                      | Delay in ms before the visible overlay is shown                   |
-| `minDuration`              | `500`                      | Min duration in ms to show the overlay                            |
-| `root`                     | `"#root"`                  | Query selector for application root (when `contained` is `false`) |
-| `wrapperComponent`         | `div`                      | Component that wraps the actual children                          |
-| `fallbackStyle`            | <i>(centered)</i>          | Style for `fallbackWrapperComponent`                              |
-| `overlayComponent`         | `div`                      | Component for the overlay                                         |
-| `fallbackWrapperComponent` | `div`                      | Component that wraps the fallback element                         |
+| Name                  | Type                    | Default value                                                  | Description                                                                                                                         |
+| --------------------- | ----------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `Backdrop`            | `React.ElementType`     | styled `div`                                                   | A Component that wraps and centers `fallback`                                                                                       |
+| `ChildrenWrapper`     | `React.ElementType`     | `contained`: styled `div` <br/> `contained=false`: `div`       | A Component that wraps `children`                                                                                                   |
+| `Container`           | `React.ElementType`     | `contained`: styled `div` <br/> `contained=false`: `undefined` | A Component that wraps `SuspenseOverlayCore`                                                                                        |
+| `Fallback`            | `React.ElementType`     | [`Fallback`](src/Fallback.tsx)                                 | React Transition Group / CSSTransition                                                                                              |
+| `contained`           | `boolean`               | `true`                                                         | Set `false` to show a fullscreen/uncontained overlay                                                                                |
+| `fullscreenContainer` | `string \| HTMLElement` | `document.body`                                                | A default value for `container`. Used also to apply different styles.                                                               |
+| `container`           | `string \| HTMLElement` | `fullscreenContainer`                                          | A query selector for an element or a reference to an element that the fullscreen/uncontained `Backdrop` & `fallback` is rendered to |
+| `contained`           | `boolean`               | `true`                                                         | Set `false` to show a fullscreen overlay                                                                                            |
 
-see [Fallback.js](src/Fallback.js) for more overrides and details.
+see [Fallback.tsx](src/Fallback.tsx) for more overrides and details.
+
+<!--
+| `OverlayPortal`       | `React.ElementType`     | styled `div`                                                   | When `contained=false`, this wraps the `Backdrop` & `fallback`                                                                      |
+| `Overlay`             | `React.ElementType`     | Component                                                      | Selects weather to render contained or uncontained Overlay                                                                          |
+| `visibleStyles`       | `CSSInterpolation`      | `backdrop-filter: blur(4px);`                                  | Styles applied to `Overlay` when `fallback` is visible                                                                              |
+| `hiddenStyles`        | `CSSInterpolation`      | `backdrop-filter: blur(0px);`                                  | Styles applied to `Overlay` when `fallback` is hidden                                                                               |
+
+-->
+
+## `<SuspenseOverlayCore>`
+
+### Props
+
+| Name       | Type                 | Default value | Description                                                                                                                    |
+| ---------- | -------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `children` | `React.ReactElement` | styled `div`  | As in `React.Suspense`. Must also be a valid argument for `React.cloneElement` and forward `ref` to the outermost DOM element. |
+| `fallback` | `React.ReactElement` | styled `div`  | As in `React.Suspense`. Must also be a valid argument for `React.cloneElement`.                                                |
+| `inProp?`  | `string`             | `"open"`      | A prop name of a `boolean` that the `fallback` uses to be visible or hidden                                                    |
