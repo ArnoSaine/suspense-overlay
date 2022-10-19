@@ -33,7 +33,7 @@ export default function SuspenseOverlayCore({
         <>
           {cloneElement(children, {
             ref: (elem: HTMLElement) => {
-              // Don't lose value on suspend. Only update if we get a new element.
+              // Don't lose the value on suspend. Update only if we get a new element.
               if (elem) {
                 childrenRef.current = elem;
                 displayRef.current = elem.style.display;
