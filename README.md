@@ -17,7 +17,7 @@ export default function App() {
 ![mui-backdrop](mui-backdrop.gif "MUI Backdrop")
 
 ```js
-import { Backdrop, Box, CircularProgress } from "@mui/material";
+import { alpha, Backdrop, Box, CircularProgress } from "@mui/material";
 import { SuspenseOverlayCore } from "suspense-overlay";
 
 export default function MuiBackdropSuspense({ children }) {
