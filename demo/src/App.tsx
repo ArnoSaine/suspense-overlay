@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Suspense from "suspense-overlay";
 import Simulations from "./Simulations";
-import Suspender from "./Suspend";
+import Suspend from "./Suspend";
 
 export default function App() {
   return (
@@ -62,7 +62,7 @@ function InteractiveDemo({ contained }: { contained?: boolean }) {
         }
         contained={contained}
       >
-        <Suspender isLoading={isLoading} />
+        <Suspend isLoading={isLoading} />
         <div>Content</div>
         <div>Content</div>
         <div>Content</div>
