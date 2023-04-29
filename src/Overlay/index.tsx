@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
-import Contained from "./Contained";
-import Portal from "./Portal";
+import Contained from "./Contained.js";
+import Portal from "./Portal.js";
 
 export interface Props
   extends React.ComponentProps<typeof Contained>,

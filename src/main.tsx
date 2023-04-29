@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { Suspense } from "react";
-import Container from "./Container";
-import Fallback from "./Fallback";
-import { maxGridAreaCss } from "./Overlay/Contained";
-import SuspenseOverlayCore from "./SuspenseOverlayCore";
+import Container from "./Container.js";
+import Fallback from "./Fallback.js";
+import { maxGridAreaCss } from "./Overlay/Contained.js";
+import SuspenseOverlayCore from "./SuspenseOverlayCore.js";
 
 const GridItem = styled.div(({ contained }: { contained: boolean }) =>
   contained ? maxGridAreaCss : undefined

@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { forwardRef } from "react";
 import { createPortal } from "react-dom";
-import Grid from "../Grid";
-import useMemoizedHTMLElement from "../utils/useMemoizedHTMLElement";
-import Backdrop from "./Backdrop";
+import Grid from "../Grid.js";
+import useMemoizedHTMLElement from "../utils/useMemoizedHTMLElement.js";
+import Backdrop from "./Backdrop.js";
 
 const MaxSpace = styled(Grid)(
   ({ isFullscreen }: { isFullscreen: boolean }) => ({

@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { forwardRef } from "react";
-import Backdrop from "./Backdrop";
+import Backdrop from "./Backdrop.js";
 
 export const maxGridAreaCss = css({
   gridArea: "1 / 1",

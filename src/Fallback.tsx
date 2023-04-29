@@ -1,7 +1,7 @@
 import { ClassNames } from "@emotion/react";
 import { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
-import Overlay from "./Overlay";
+import Overlay from "./Overlay/index.js";
 
 export const defaults = {
   visibleStyles: {

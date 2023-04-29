@@ -1,4 +1,4 @@
-import Grid from "./Grid";
+import Grid from "./Grid.js";
 
 type Props = React.PropsWithChildren<{ contained: boolean }>;
 

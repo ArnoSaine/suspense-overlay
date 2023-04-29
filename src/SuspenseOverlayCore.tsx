@@ -1,5 +1,5 @@
 import { cloneElement, Suspense, useLayoutEffect, useRef } from "react";
-import useSetStateOnRender from "./utils/useSetStateOnRender";
+import useSetStateOnRender from "./utils/useSetStateOnRender.js";
 
 export interface SuspenseOverlayCoreProps
   extends React.ComponentProps<typeof Suspense> {
