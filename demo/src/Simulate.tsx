@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import Suspense from "suspense-overlay";
-import TrackComponentLifecycle from "suspense-overlay/lib/utils/TrackComponentLifecycle";
 import Suspend from "./Suspend";
 
 interface SimulateProps extends React.ComponentProps<typeof Suspense> {
@@ -58,4 +57,10 @@ export default function Simulate({
       )}
     </>
   );
+}
+
+function TrackComponentLifecycle({ onMount }: { onMount: () => void }) {
+  useLayoutEffect(onMount, []);
+
+  return null;
 }
