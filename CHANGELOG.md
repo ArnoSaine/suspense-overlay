@@ -1,7 +1,11 @@
+# 1.0.3
+
+- Fix server side `document is not defined` error
+
 # 1.0.2
 
 - Fix file resolution error in strict EcmaScript Module: "Module not found", "The extension in the request is mandatory for it to be fully specified"
-  - Add `.js` extension to import paths
+- Add `.js` extension to import paths
 
 # 1.0.1
 
