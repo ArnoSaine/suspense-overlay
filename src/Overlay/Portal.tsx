@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled, { CSSObject } from "@emotion/styled";
 import { forwardRef } from "react";
 import { createPortal } from "react-dom";
 import Grid from "../Grid.js";
@@ -6,15 +6,16 @@ import useMemoizedHTMLElement from "../utils/useMemoizedHTMLElement.js";
 import Backdrop from "./Backdrop.js";
 
 const MaxSpace = styled(Grid)(
-  ({ isFullscreen }: { isFullscreen: boolean }) => ({
-    position: isFullscreen ? "fixed" : "absolute",
-    inset: 0,
-  })
+  ({ isFullscreen }: { isFullscreen: boolean }) =>
+    ({
+      position: isFullscreen ? "fixed" : "absolute",
+      inset: 0,
+    } satisfies CSSObject),
 );
 
 export const defaults = {
   Backdrop,
-  fullscreenContainer: document.body,
+  fullscreenContainer: typeof document === "object" ? document.body : undefined,
   OverlayPortal: MaxSpace,
 };
 
@@ -34,7 +35,7 @@ const Portal = forwardRef<HTMLDivElement, Props>(function Portal(
     fullscreenContainer = defaults.fullscreenContainer,
     OverlayPortal = defaults.OverlayPortal,
   },
-  ref
+  ref,
 ) {
   fullscreenContainer = useMemoizedHTMLElement(fullscreenContainer);
   container ??= fullscreenContainer;
@@ -46,7 +47,7 @@ const Portal = forwardRef<HTMLDivElement, Props>(function Portal(
     <OverlayPortal ref={ref} isFullscreen={isFullscreen}>
       <Backdrop>{children}</Backdrop>
     </OverlayPortal>,
-    container!
+    container!,
   );
 });
 
